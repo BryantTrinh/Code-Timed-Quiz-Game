@@ -66,6 +66,10 @@ if (buttonEl.value !== questions[currentQuestionIndex].answer){
   timerEl.textContent = time;
 
 
+  rightwrongEl.textContent = "Wrong" 
+} else {
+  rightwrongEll.textContent = 'Correct';
+}
 // right or wrong feedback for user
   rightwrongEl=setAttribute('class', 'rightwrong');
   setTimeout(function() {
@@ -109,3 +113,44 @@ function clockTick() {
     quizEnd();
   }
 }
+
+function saveHighscore() {
+
+// Lastly, entering in initials, submitting, and storing final score.
+  var initials = initialsEl.value.trim();
+
+// cannot enter in empty string for initials.
+  if(initials !== '') {
+  // receive scores from local storage or set to empty array
+    // var highscores = 
+
+
+// new user
+
+    var newScore = {
+      score: time;
+      initials: initials;
+    };
+
+// saving to localstore with .push
+    highscores.push(newScore);
+    window.localStorage.setItem('highscores', //receive high score));
+
+// After saving score, we need to show them the high score page.
+    window.location.href = 'quizhighscores.html';
+  }
+}
+
+function checkEnter(event) {
+  if (Event.key === 'Enter') {
+    saveHighscore();
+  }
+}
+
+submitBtn.onclick = saveHighscore;
+
+startBtn.onclick = startQuiz;
+
+choicesEl.onClick = questionClick;
+
+initialsEl.onkeyup = checkEnter;
